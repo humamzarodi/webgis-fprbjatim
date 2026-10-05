@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peta Sebaran Lembaga Anggota FPRB Jawa Timur</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="header">
+  <button class="btn icon mobile-only" id="btnMenu" title="Filter">☰</button>
+  <img src="assets/logo-fprb.png" alt="Logo FPRB" class="logo" onerror="this.style.display='none'">
+  <div class="title"><small>WEBGIS · FPRB JAWA TIMUR</small><b>Peta Sebaran Lembaga Anggota</b></div>
+  <nav>
+    <button class="btn" id="btnInfo">ℹ Info</button>
+    <button class="btn" id="btnStat">📊 Statistik</button>
+    <button class="btn" id="btnRefresh">🔄 Perbarui Data</button>
+  </nav>
+</header>
+
+<aside id="sidebar">
+  <div class="sec">
+    <input id="q" type="search" placeholder="🔎 Cari lembaga..." autocomplete="off">
+    <div id="results" class="results" hidden></div>
+  </div>
+  <div class="sec grid2">
+    <label>Kabupaten/Kota<select id="fKab"></select></label>
+    <label>Klaster<select id="fKlaster"></select></label>
+  </div>
+  <div class="sec">
+    <label class="chk"><input type="checkbox" id="fAktif" checked> Tampilkan hanya anggota aktif</label>
+    <button class="btn small" id="btnReset">Reset Filter</button>
+  </div>
+  <div class="sec">
+    <h3>Statistik <span id="shown" class="muted"></span></h3>
+    <div class="cards">
+      <div><b id="sLembaga">0</b><span>Lembaga</span></div>
+      <div><b id="sKab">0</b><span>Kabupaten/Kota</span></div>
+      <div><b id="sKat">0</b><span>Kategori</span></div>
+      <div><b id="sKlas">0</b><span>Klaster</span></div>
+    </div>
+    <div id="charts">
+      <h4>Per Kabupaten/Kota (10 teratas)</h4><div class="cw"><canvas id="cKab"></canvas></div>
+      <h4>Per Kategori</h4><div class="cw"><canvas id="cKat"></canvas></div>
+      <h4>Per Klaster</h4><div class="cw"><canvas id="cKlas"></canvas></div>
+    </div>
+  </div>
+  <div class="sec">
+    <h3>Kategori <a href="#" id="allCat" class="muted">Tampilkan semua</a></h3>
+    <div id="legend"></div>
+  </div>
+  <div class="sec">
+    <h3>Kualitas Data</h3>
+    <ul id="qc" class="qc"></ul>
+    <details id="problemBox" hidden><summary id="problemSum"></summary><ul id="problemList"></ul></details>
+  </div>
+</aside>
+
+<main id="mapWrap">
+  <div id="map"></div>
+  <div class="tools">
+    <button class="btn icon" id="btnHome" title="Full Extent">⌂</button>
+    <button class="btn icon" id="btnLoc" title="Lokasi Saya">📍</button>
+    <button class="btn icon" id="btnPrint" title="Cetak Peta">🖨</button>
+    <button class="btn icon" id="btnDl" title="Download Data">⬇</button>
+  </div>
+  <div id="empty" hidden><h3>DATA TIDAK DITEMUKAN</h3><p>Tidak ada lembaga yang sesuai<br>dengan filter yang dipilih.</p><button class="btn primary" id="btnReset2">RESET FILTER</button></div>
+  <div id="toast" hidden></div>
+</main>
+
+<div id="loading"><div class="box"><div class="spin"></div><b id="loadMsg">Memuat data anggota...</b><span id="loadSub">Mohon tunggu</span><button class="btn primary" id="btnRetry" hidden>Coba Lagi</button></div></div>
+
+<div class="modal" id="mInfo" hidden><div class="mbox"><button class="x" data-close>×</button>
+  <h2>Tentang WebGIS</h2>
+  <p>WebGIS Peta Sebaran Lembaga Anggota FPRB Jawa Timur merupakan media informasi spasial yang menyajikan persebaran lembaga/organisasi anggota Forum Pengurangan Risiko Bencana Jawa Timur.</p>
+  <h4>Cara Penggunaan</h4>
+  <ol><li>Klik penanda atau klaster angka pada peta untuk melihat lembaga.</li><li>Gunakan pencarian, filter kabupaten/kota, dan klaster di panel kiri.</li><li>Klik kategori pada legenda untuk menampilkan/menyembunyikan titik.</li><li>Gunakan 📍 lokasi saya, 🖨 cetak, dan ⬇ unduh data pada tombol di peta.</li></ol>
+</div></div>
+<div class="modal" id="mDetail" hidden><div class="mbox"><button class="x" data-close>×</button><div id="detailBody"></div></div></div>
+<div class="modal" id="mDl" hidden><div class="mbox"><button class="x" data-close>×</button>
+  <h2>Download Data</h2>
+  <div class="dlgrid">
+    <button class="btn" data-dl="csv-all">CSV · seluruh data</button><button class="btn" data-dl="csv-filter">CSV · hasil filter</button>
+    <button class="btn" data-dl="geo-all">GeoJSON · seluruh data</button><button class="btn" data-dl="geo-filter">GeoJSON · hasil filter</button>
+  </div>
+</div></div>
+
+<footer id="footer"><b>Sumber Data: Database Anggota FPRB Jawa Timur – Google Spreadsheet</b> · Peta dikembangkan menggunakan Leaflet.js</footer>
+
+<div id="printHead">
+  <img src="assets/logo-fprb.png" alt="" onerror="this.style.display='none'">
+  <div><h2>PETA SEBARAN LEMBAGA ANGGOTA FPRB JAWA TIMUR</h2><p id="printDate"></p></div>
+</div>
+<div id="printLegend"></div>
+<div id="printSrc">Sumber data: Database Anggota FPRB Jawa Timur melalui Google Spreadsheet</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

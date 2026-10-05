@@ -1,0 +1,13 @@
+id,nama_lembaga,kategori,kabupaten_kota,alamat,kontak,email,website,klaster,latitude,longitude,deskripsi,status
+001,Contoh Lembaga Surabaya,LSM/NGO,Kota Surabaya,Jl. Contoh No. 1 Surabaya,081200000001,surabaya@contoh.id,contoh-surabaya.id,Kesiapsiagaan,-7.250445,112.768845,Data fiktif untuk uji coba,Aktif
+002,Contoh Lembaga Malang,Pemerintah,Kota Malang,Jl. Contoh No. 2 Malang,081200000002,malang@contoh.id,contoh-malang.id,Logistik,-7.98,112.63,Data fiktif untuk uji coba,Aktif
+003,Contoh Universitas Jember,Perguruan Tinggi,Kabupaten Jember,Jl. Contoh No. 3 Jember,081200000003,jember@contoh.id,,Pendidikan,-8.17,113.70,Data fiktif untuk uji coba,Aktif
+004,Contoh Relawan Banyuwangi,Relawan,Kabupaten Banyuwangi,Jl. Contoh No. 4 Banyuwangi,081200000004,,,Evakuasi,-8.22,114.37,Data fiktif untuk uji coba,Aktif
+005,Contoh Komunitas Kediri,Komunitas,Kota Kediri,Jl. Contoh No. 5 Kediri,081200000005,kediri@contoh.id,,Kesiapsiagaan,-7.82,112.01,Data fiktif untuk uji coba,Aktif
+006,Contoh Usaha Sidoarjo,Dunia Usaha,Kabupaten Sidoarjo,Jl. Contoh No. 6 Sidoarjo,081200000006,usaha@contoh.id,contoh-usaha.id,Logistik,-7.45,112.72,Data fiktif untuk uji coba,Aktif
+007,Contoh Media Madiun,Media,Kota Madiun,Jl. Contoh No. 7 Madiun,081200000007,media@contoh.id,,Komunikasi,-7.63,111.52,Data fiktif untuk uji coba,Aktif
+008,Contoh Ormas Pamekasan,Organisasi Masyarakat,Kabupaten Pamekasan,Jl. Contoh No. 8 Pamekasan,081200000008,,,Kesehatan,-7.16,113.48,Data fiktif untuk uji coba,Aktif
+009,Contoh LSM Malang,LSM/NGO,Kota Malang,Jl. Contoh No. 9 Malang,081200000009,lsm@contoh.id,,Kesiapsiagaan,-7.95,112.61,Data fiktif untuk uji coba,Verifikasi
+010,Contoh Relawan Surabaya,Relawan,Kota Surabaya,Jl. Contoh No. 10 Surabaya,081200000010,,,Evakuasi,-7.29,112.74,Data fiktif untuk uji coba,Aktif
+011,Contoh Lembaga Nonaktif,Komunitas,Kabupaten Blitar,Jl. Contoh No. 11 Blitar,081200000011,,,Pendidikan,-8.10,112.17,Data fiktif untuk uji coba,Tidak Aktif
+012,Contoh Koordinat Kosong,LSM/NGO,Kabupaten Tuban,Jl. Contoh No. 12 Tuban,081200000012,,,Logistik,,,Contoh data tanpa koordinat,Aktif
