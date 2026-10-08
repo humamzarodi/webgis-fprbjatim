@@ -1,7 +1,7 @@
 :root{--navy:#0f2240;--navy2:#16315c;--orange:#f26b0f;--bg:#f3f5f8;--line:#dde3ec;--txt:#1b2536;--mut:#6b778c;--r:12px;--sh:0 4px 16px rgba(15,34,64,.15)}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--txt);background:var(--bg);display:grid;grid-template-columns:360px 1fr;grid-template-rows:60px 1fr 30px;grid-template-areas:"h h" "s m" "f f"}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--txt);background:var(--bg);display:grid;grid-template-columns:360px 1fr;grid-template-rows:60px 1fr 44px;grid-template-areas:"h h" "s m" "f f"}
 #header{grid-area:h;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:3px solid var(--orange)}
 .logo{height:40px}
 .title{flex:1;line-height:1.2}.title small{display:block;color:var(--orange);letter-spacing:.12em;font-size:11px;font-weight:600}.title b{font-size:17px}
@@ -62,7 +62,10 @@ details{font-size:12px;margin-top:6px}details ul{padding-left:18px;color:var(--m
 .mbox h2{margin-top:0;color:var(--navy)}.mbox .x{position:absolute;right:12px;top:8px;border:0;background:none;font-size:26px;cursor:pointer}
 .dlgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .dtab td{padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}.dtab td:first-child{color:var(--mut);width:110px}
-#footer{grid-area:f;background:var(--navy);color:#cbd5e6;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0 10px;text-align:center;overflow:hidden;white-space:nowrap}
+#footer{grid-area:f;background:var(--navy);color:#cbd5e6;font-size:12px;display:flex;align-items:center;justify-content:center;gap:16px;padding:0 10px;text-align:center;overflow:hidden}
+.foot-logos{display:flex;align-items:center;gap:8px;flex:none;background:#fff;border-radius:8px;padding:3px 10px}
+.foot-logos img{height:28px;width:auto;object-fit:contain;display:block}
+.foot-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #printHead,#printLegend,#printSrc{display:none}
 @media(max-width:800px){
  body{grid-template-columns:1fr;grid-template-areas:"h" "m" "f"}
